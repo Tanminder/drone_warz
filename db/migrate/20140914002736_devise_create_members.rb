@@ -33,7 +33,7 @@ class DeviseCreateMembers < ActiveRecord::Migration
       t.string :name
       t.string :location
       t.text :description
-      t.references :league
+      t.references :team
 
       t.timestamps
     end
