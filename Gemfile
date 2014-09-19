@@ -31,6 +31,8 @@ gem 'slim'
 gem 'devise'
 gem 'faker'
 
+gem 'bracket_tree'
+
 group :development do
   gem 'hirb'
   gem 'interactive_editor'
