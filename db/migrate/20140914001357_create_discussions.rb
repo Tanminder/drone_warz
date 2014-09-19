@@ -4,7 +4,7 @@ class CreateDiscussions < ActiveRecord::Migration
       t.string :title
       t.text :body
       t.references :member, index: true
-      t.references :league, index: true
+      t.references :team, index: true
 
       t.timestamps
     end

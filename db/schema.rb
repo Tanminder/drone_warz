@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140916051119) do
+ActiveRecord::Schema.define(version: 20140919200253) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,34 +31,13 @@ ActiveRecord::Schema.define(version: 20140916051119) do
     t.string   "title"
     t.text     "body"
     t.integer  "member_id"
+    t.integer  "team_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "team_id"
   end
 
   add_index "discussions", ["member_id"], name: "index_discussions_on_member_id", using: :btree
   add_index "discussions", ["team_id"], name: "index_discussions_on_team_id", using: :btree
-
-  create_table "events", force: true do |t|
-    t.string   "name"
-    t.string   "location"
-    t.datetime "date"
-    t.text     "description"
-    t.integer  "league_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "events", ["league_id"], name: "index_events_on_league_id", using: :btree
-
-  create_table "leagues", force: true do |t|
-    t.string   "name"
-    t.string   "company"
-    t.string   "location"
-    t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "members", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -74,20 +53,19 @@ ActiveRecord::Schema.define(version: 20140916051119) do
     t.string   "name"
     t.string   "location"
     t.text     "description"
+    t.integer  "team_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "team_id"
   end
 
   add_index "members", ["email"], name: "index_members_on_email", unique: true, using: :btree
   add_index "members", ["reset_password_token"], name: "index_members_on_reset_password_token", unique: true, using: :btree
-  add_index "members", ["team_id"], name: "index_members_on_team_id", using: :btree
 
   create_table "rsvps", force: true do |t|
+    t.integer  "tournament_id"
     t.integer  "member_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "tournament_id"
   end
 
   add_index "rsvps", ["member_id"], name: "index_rsvps_on_member_id", using: :btree
@@ -95,10 +73,10 @@ ActiveRecord::Schema.define(version: 20140916051119) do
 
   create_table "teams", force: true do |t|
     t.string   "name"
+    t.text     "description"
     t.string   "location"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "description"
   end
 
   create_table "tournaments", force: true do |t|
